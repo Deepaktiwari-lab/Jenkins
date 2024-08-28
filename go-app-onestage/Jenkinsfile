@@ -1,0 +1,12 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Build'){
+            steps{
+                // Get main.go code from a Github repository
+                git 'https://github.com/Deepaktiwari-lab/Learning-content.git'
+            }
+        }
+    }
+}

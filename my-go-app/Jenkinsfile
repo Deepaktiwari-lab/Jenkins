@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    tools{
+        go '1.23'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Checkout code from Git (modify if using a different VCS)
+                git 'https://github.com/Deepaktiwari-lab/my-go-app.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Ensure Go is installed and in PATH
+                    sh 'go build -o my-go-app'
+                }
+            }
+        }
+
+        stage('Test') {
+            steps {
+                script {
+                    // Run tests (if you have any)
+                    sh 'go test ./...'
+                }
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: 'my-go-app', allowEmptyArchive: true
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build and tests were successful!'
+        }
+        failure {
+            echo 'Build or tests failed.'
+        }
+    }
+}

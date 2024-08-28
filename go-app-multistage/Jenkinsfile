@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+
+    stages{
+        stage('Dev'){
+            steps{
+                // Get some code from GitHub repos
+                git 'https://github.com/Deepaktiwari-lab/Learning-content.git'
+            }
+        }
+        stage('UAT'){
+            steps{
+                // Get some code from GitHub repo
+                git 'https://github.com/Deepaktiwari-lab/Learning-content.git'
+            }
+        }
+    }
+}
